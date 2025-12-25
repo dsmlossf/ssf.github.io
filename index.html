@@ -1,479 +1,612 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>SSF 2022</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:100,300,400,700,500' rel='stylesheet' type='text/css'>
+  <title>SSF 2022 | Data Science, Machine Learning and Optimization to Support Society of the Future</title>
 
-    <link href='https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|Poppins:300,400,600,700" rel="stylesheet">
 
+  <!-- Font Awesome -->
+  <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
+  <!-- Bootstrap (local) -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Bootstrap -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+  <!-- Your existing CSS -->
+  <link href="css/style.css" rel="stylesheet">
 
-    <!-- Style CSS -->
-    <link href="css/style.css" rel="stylesheet">
-    <style type="text/css">
-        @media only screen and (max-width: 600px) {
-            #google-form {
-                display: none;
-            }
-        }
+  <style>
+    :root{
+      --bg:#f6f7fb;
+      --card:#ffffff;
+      --ink:#111827;
+      --muted:#6b7280;
+      --brand:#0ea5e9;
+      --brand2:#7c3aed;
+      --shadow: 0 10px 30px rgba(0,0,0,.08);
+      --shadow2: 0 18px 45px rgba(0,0,0,.12);
+      --radius: 18px;
+    }
 
-        @media only screen and (min-width: 600px) {
-            #google-form-link {
-                visibility: hidden;
-            }
-        }
-    </style>
+    html, body { height: 100%; }
+    body{
+      font-family: "Open Sans", sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+    }
 
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
+    /* Smooth scroll */
+    html { scroll-behavior: smooth; }
+
+    /* Navbar */
+    .navbar.main-menu{
+      border: 0;
+      margin: 0;
+      background: rgba(255,255,255,.85);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 8px 24px rgba(0,0,0,.06);
+    }
+    .navbar.main-menu .navbar-brand img{
+      height: 34px;
+      width: auto;
+      border-radius: 10px;
+    }
+    .navbar.main-menu .navbar-nav > li > a{
+      font-weight: 600;
+      color: #111 !important;
+      padding-top: 18px;
+      padding-bottom: 18px;
+    }
+    .navbar.main-menu .navbar-nav > li > a:hover{
+      color: var(--brand) !important;
+    }
+
+    /* Hero */
+    .hero{
+      position: relative;
+      min-height: 75vh;
+      padding: 120px 0 70px;
+      overflow: hidden;
+      background:
+        radial-gradient(1000px 600px at 10% 10%, rgba(124,58,237,.20), transparent 60%),
+        radial-gradient(900px 500px at 90% 20%, rgba(14,165,233,.18), transparent 60%),
+        linear-gradient(135deg, #0b1220 0%, #111827 50%, #0b1220 100%);
+      color: #fff;
+    }
+    .hero:before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background: url("img/hero-bg.jpg") center/cover no-repeat;
+      opacity: .12;
+      filter: saturate(1.1) contrast(1.05);
+    }
+    .hero .container{ position: relative; z-index: 2; }
+    .hero-badge{
+      display: inline-block;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.18);
+      font-weight: 600;
+      letter-spacing: .2px;
+      margin-bottom: 14px;
+    }
+    .hero h1{
+      font-family: "Poppins", sans-serif;
+      font-size: 52px;
+      line-height: 1.05;
+      margin: 8px 0 12px;
+      font-weight: 700;
+    }
+    .hero h2{
+      font-family: "Poppins", sans-serif;
+      font-size: 20px;
+      line-height: 1.5;
+      font-weight: 400;
+      color: rgba(255,255,255,.9);
+      margin: 0 0 18px;
+    }
+    .hero .meta{
+      color: rgba(255,255,255,.75);
+      margin: 10px 0 22px;
+      font-size: 14px;
+    }
+    .hero-actions .btn{
+      border-radius: 999px;
+      padding: 12px 18px;
+      font-weight: 700;
+      letter-spacing: .2px;
+      box-shadow: 0 10px 22px rgba(0,0,0,.18);
+    }
+    .btn-primary-grad{
+      border: 0;
+      background: linear-gradient(135deg, var(--brand) 0%, var(--brand2) 100%);
+    }
+    .btn-ghost{
+      background: rgba(255,255,255,.10);
+      border: 1px solid rgba(255,255,255,.20);
+      color: #fff;
+    }
+    .btn-ghost:hover{ color:#fff; background: rgba(255,255,255,.16); }
+
+    /* Section wrapper */
+    .section-wrapper{
+      padding: 55px 0;
+    }
+    .section-title h1{
+      font-family: "Poppins", sans-serif;
+      font-size: 28px;
+      font-weight: 700;
+      margin: 0 0 18px;
+    }
+    .section-sub{
+      color: var(--muted);
+      margin: -6px 0 18px;
+    }
+
+    /* Cards */
+    .cardx{
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(17,24,39,.06);
+      overflow: hidden;
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+    .cardx:hover{
+      transform: translateY(-3px);
+      box-shadow: var(--shadow2);
+    }
+    .cardx .cardx-body{ padding: 18px 18px; }
+    .cardx .cardx-title{
+      font-family: "Poppins", sans-serif;
+      font-weight: 700;
+      font-size: 16px;
+      margin: 0 0 8px;
+    }
+    .cardx .cardx-meta{
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 10px;
+    }
+    .chip{
+      display: inline-block;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(14,165,233,.10);
+      color: #0369a1;
+      font-weight: 700;
+      font-size: 12px;
+      margin-right: 6px;
+      border: 1px solid rgba(14,165,233,.20);
+    }
+    .chip.purple{
+      background: rgba(124,58,237,.10);
+      color: #5b21b6;
+      border-color: rgba(124,58,237,.20);
+    }
+
+    /* Pinterest masonry (CSS columns) */
+    .masonry{
+      column-count: 3;
+      column-gap: 16px;
+    }
+    .masonry-item{
+      break-inside: avoid;
+      margin: 0 0 16px;
+    }
+    @media(max-width: 991px){ .masonry{ column-count: 2; } }
+    @media(max-width: 640px){ .masonry{ column-count: 1; } }
+
+    /* Image inside cards */
+    .cardx img{
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* Organizer cards */
+    .person{
+      text-align: center;
+      padding: 20px 18px;
+    }
+    .person img{
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 999px;
+      border: 4px solid rgba(14,165,233,.18);
+      margin-bottom: 10px;
+    }
+    .person h3{
+      font-family: "Poppins", sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      margin: 6px 0 2px;
+    }
+    .person .small{
+      color: var(--muted);
+      font-size: 13px;
+      margin: 2px 0;
+    }
+    .person a{ color: inherit; text-decoration: none; }
+
+    /* Footer */
+    .footer{
+      margin-top: 30px;
+      background: #0b1220;
+      color: rgba(255,255,255,.78);
+      padding: 28px 0;
+    }
+    .footer a{ color: rgba(255,255,255,.88); }
+    .social a{
+      display:inline-block;
+      width: 40px; height: 40px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.12);
+      text-align:center;
+      line-height: 40px;
+      margin-right: 8px;
+    }
+    .social a:hover{ background: rgba(255,255,255,.14); }
+
+    /* Hide embedded google form on small screens, keep link visible */
+    @media only screen and (max-width: 600px){ #google-form{ display:none; } }
+    @media only screen and (min-width: 600px){ #google-form-link{ visibility:hidden; } }
+  </style>
+
+  <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
+  <![endif]-->
 </head>
 
 <body id="page-top" data-spy="scroll" data-target=".navbar">
-    <div id="main-wrapper">
-        <!-- Page Preloader -->
-        <div id="preloader">
-            <div id="status">
-                <div class="status-mes"></div>
-            </div>
-        </div>
 
-        <header class="header">
-            <!-- Navigation -->
-            <nav class="navbar main-menu" role="navigation">
-                <div class="container">
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                        <a class="navbar-brand page-scroll" href="#page-top"><img src="img/logo.png" alt=""></a>
-                    </div>
+  <!-- NAV -->
+  <nav class="navbar navbar-fixed-top main-menu" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand page-scroll" href="#page-top">
+          <img src="img/logo.png" alt="ACE">
+        </a>
+      </div>
 
-                    <!-- Collect the nav links, forms, and other content for toggling -->
-                    <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
-                        <ul class="nav navbar-nav">
-                            <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
-                            <li class="hidden"><a href="#page-top"></a></li>
-                            <li><a class="page-scroll" href="#section-news">News</a></li>
-                            <li><a class="page-scroll" href="#section-intro">Overview</a></li>
-                          
-                          <!--  <li><a class="page-scroll" href="#section-keynote">Keynote Speakers</a></li> -->
-                            <li><a class="page-scroll" href="#section-organizingcommittee">Organizers</a></li>
-                            
-                            <li><a class="page-scroll" href="#section-contact">Contact Us</a></li>
-                        </ul>
-                    </div>
-                    <!-- /.navbar-collapse -->
-                </div>
-                <!-- /.container -->
-            </nav>
-
-            <!-- .nav -->
-
-        </header>
-
-        <div class="jumbotron text-center">
-            <div class="content">
-                <h1>SSF 2022</h1>
-                <h2 style="color:white;">PPSN 2022 Workshop on Data Science, Machine Learning and Optimization in Support of the Society of the Future</h2>
-                <div class="event-date">in conjunction with </div> 
-                <div class="event-date"> The 17 th International Conference on Parallel Problem Solving from Nature (PPSN XVII) September 10-14, 2022  Dortmund, Germany </div>
-                <a class="page-scroll" href="#section-intro"><button type="button" class="btn btn-default btn-lg">LEARN MORE</button></a>
-                
-                <br>
-                
-
-            </div>
-        </div>
-        <!-- .Jumbotron-->
-
-        <section id="section-news" class="section-wrapper about-event gray-bg">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="section-title">
-                            <h1>NEWS</h1>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <p align="justify">
-                        <ul style="list-style: none;">
-
-                            
-                                                  
-                            <li>
-                                <div style="width: 5%; float: left;"><i class="fa fa-cog fa-spin fa-x" style="color:#0000ff;" aria-hidden="true"></i></div>
-                                <!--<a href="https://dsmlossf.github.io/SSF.pdf">Call for Abstracts is out!!!</a> -->
-				<p> Prospective Titles and Authors of the Accepted Abstracts (Workshop Date: 11 September 2022)</p>
-                                <img src="img/Schedule.png" alt="Schedule" style="width:1000px;height:400px;">
-
-                            </li>
-
-                        </ul>
-                        </p>
-                    </div>
-
-                </div>
-            </div>
-        </section>
-        
-        <section id="section-intro" class="section-wrapper about-event">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="section-title">
-                            <h1>Workshop</h1>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="row">
-
-                    <div class="col-md-12">
-
-                        
-                        <ul style="text-align: justify; list-style: none;">
-                            <li><b id="task-main">Workshop Overview</b><br><br>
-                                <p>Our societies are facing arduous global challenges to sustain and develop our civilisations. The development of new dedicated Intelligent Decision-Support Systems (IDSSs) could help address such challenges.  Such developments can benefit from the current capabilities to collect data at an unprecedented level and by the amalgamation of novel techniques from Data Science (DS), Machine Learning (ML), Multi-objective Optimisation (MOO) and Multi-criteria Decision-Analysis/Making (MCDA/MCDM). In this workshop, we aim to actively identify the challenges in developing and deploying IDSSs for the society of the future, and discuss potential avenues to tackle them, with a particular focus on helping the decision-making process of policymakers. We are interested in studies on the development and/or application of computational techniques in the context of societal challenges. The topics of interest include (but are not limited to):</p>
-            
-                                 <br><br>
-                                <b id="task-main">Call for Abstracts</b><br>
-                                <p><b>Topics of Interest: </b>Abstracts are invited on substantial, interactive and published/unpublished research on all aspects. We welcome demonstrations and talks on any of the following topics of interest, but not limited to:</p>
-                                </ul>
-            <b> Techniques </b>                     
-            <li> Search and identify satisficing strategies, and their trade-offs under competing objectives</li>
-            <li> Addressing uncertainty and time-varying data, predictions, and policies</li>
-            <li> Visualising trade-offs between competing objectives</li>
-            <li> Surrogate-assisted exploration of decision alternatives</li>
-            <li> Interactive exploration of decision alternatives</li>
-            <li> Challenges in legislation, and relevant mitigating approaches</li>
-            <li> Transfer learning and optimization: how can lessons from solving a problem can help solve another?</li>
-            <li> Multi-Criteria Decision-Analysis/Making (MCDA/MCDM) techniques for the development of IDSS</li>
-            <li> Dealing with practical costs of deploying solutions in the wild</li>
-	    <li> Models of societies such as: compartments, networks, multilayer-networks</li>
-
-
-	    <b>Societal Challenges</b>
-            <li> Effects of climate change (e.g., floods, landslides, desert expansion, survival of forests and of bio-diversity)</li>
-            <li> Public health (e.g., addressing the heath-economy dilemma of fighting a pandemic)</li>
-            <li> Issues of population growth and urbanization</li>
-            <li> Fighting poverty and supporting the development of underdeveloped countries</li>
-            <li> Sustainable resource development, infrastructure, and waste management</li>
-            <li> Addressing natural & man-made disasters (e.g., earthquakes, floods, landslides, tsunamis, wars & terrorism)</li>
-
-                                    
-                                <ul>
-                                <br>
-                                <b id="task-main">Submission Instructions:</b><br>
-                                <ul>
-				    <li> We invite authors/participants to submit new ideas, positional statements, and reviews/summaries/comments/techniques on societal challenges.</li>
-                                    <li> Submissions should be in the form of extended abstracts (200-300 words abstract).</li>
-				    <li> Please send your submission to: dsmlossf@gmail.com </li>
-				
-
-				</ul> 
-			<!---
-                                <br>
-                                <a href="https://easychair.org/conferences/?conf=ppsn2022">https://easychair.org/conferences/?conf=ppsn2022</a>
-                                <br>
-                                <p>Submitting a paper to the workshop means that the authors agree that <b>at least one author should attend the conference to present the paper</b>, if the paper is accepted. For no-show authors, their affiliations will receive a notification.</p>
-                            </li>
-			--->
-                            <br><br>
-                            <li><b>Important Dates for Workshop:</b>
-                                <ul style="margin-left: 2%;">
-                                    
-				    <li><b><s>Out Now:</s></b> Call for Abstracts</li>
-				    <li><b><s>July 31, 2022:</s></b> Submission Deadline</li>
-                                    <li><b>August 15, 2022:</b> Author Notification</li>
-				    <li><b>September 11, 2022:</b> SSF WorkShop Schedule</li>
-                                    <li><b>September 10-14, 2022:</b> PPSN Conference</li>
-                                    
-                                </ul>
-                            </li>
-
-                            <p>Important Note: The PPSN 2022 conference will be held “on-site” only.  A hybrid format is not planned. In case of pandemic-caused restrictions, the event will be switched to a full online format.</p>
-                           
-                            
-                    </div>
-
-                </div>
-            </div>
-        </section>
+      <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+        <ul class="nav navbar-nav">
+          <li class="hidden"><a href="#page-top"></a></li>
+          <li><a class="page-scroll" href="#section-news">News</a></li>
+          <li><a class="page-scroll" href="#section-intro">Overview</a></li>
+          <li><a class="page-scroll" href="#section-organizingcommittee">Organizers</a></li>
+          <li><a class="page-scroll" href="#section-contact">Contact</a></li>
+        </ul>
+      </div>
     </div>
-    </section>
+  </nav>
 
-    <!---
-    <section id="section-keynote" class="section-wrapper team client-logo">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="section-title">
-                            <h1>Keynote Speakers</h1>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <figure class="thumbnail">
-                            <a href="https://science.psu.edu/astro/people/sxs540"><img src="img/committee/keynote1.jpeg" class="img-responsive img-circle" alt="Image" style="height:190px; width:170px;"></a>
-                            <figcaption class="caption text-center">
-                                <h3> Prof. Steinn Sigurdsson
-                                    <small> Scientific Director of arXiv <br> Department of Astronomy & Astrophysics <br>Pennsylvania State University</small>
-                                </h3>
-                            </figcaption>
-                        </figure>
-                    </div>
-                    <div class="col-md-6">
-                        <figure class="thumbnail">
-                            <a href="https://research.snap.com/team/leonardo-neves/"><img src="img/committee/keynote2.jpeg" class="img-responsive img-circle" alt="Image" style="height:190px; width:170px;"></a>
-                            <figcaption class="caption text-center">
-                                <h3>Leonardo Neves
-                                    <small>Lead Research Scientist <br/> Snap Research</small>
-                                </h3>
-                            </figcaption>
-                        </figure>
-                    </div>
-                </div>
-      </section>    
-    
-    --->
-    <section id="section-organizingcommittee" class="section-wrapper team client-logo">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="section-title">
-                            <h1>Organizing Committee</h1>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-            <div class="col-lg-4 col-md-6">
-                <figure class="thumbnail">
-                    <a href="https://rohitsalgotra.github.io/"><img src="img/committee/rohit.jpg" class="img-responsive img-circle" alt="Image" style="height:190px; width:170px;"></a>
-                    <figcaption class="caption text-center">
-                        <h3>Rohit Salgotra
-                            <small>Research Officer</small>
-                            <small>Swansea Univeristy</small>
-			    <small>UK</small>
-                        </h3>
-                    </figcaption>
-                </figure>
-            </div>
-                        
-            <div class="col-lg-4 col-md-6">
-                <figure class="thumbnail">
-                    <a href="https://www.swansea.ac.uk/staff/science/compsci/rahat-a-a-m/ "><img src="img/committee/alma.jpg" class="img-responsive img-circle" alt="Image" style="height:190px; width:170px;"></a>
-                    <figcaption class="caption text-center">
-                        <h3>Alma Rahat
-                            <small>Lecturer</small>
-                            <small>Swansea University</small>
-                            <small>UK</small>
-                        </h3>
-                    </figcaption>
-                </figure>
-            </div>
-                        
-                        
-            <div class="col-lg-4 col-md-6">
-                <figure class="thumbnail">
-                    <a href="http://www.eng.tau.ac.il/~moshaiov/"><img src="img/committee/ami.jpg" class="img-responsive img-circle" alt="Image" style="height:190px; width:170px;"></a>
-                    <figcaption class="caption text-center">
-                        <h3>Amiram Moshaiov
-                            <small>Professor</small>
-                            <small>Tel Aviv University</small>
-                            <small>Israel</small>
-                        </h3>
-                    </figcaption>
-                </figure>
-            </div>
-                </div>
-       
-        <!--         
-        <div class="row" style="margin-top: 7%">
-            <div class="col-md-12">
-                <div class="section-title">
-                    <h1>Steering Committee</h1>
-                </div>
-            </div>          
-            <div class="col-lg-3 col-md-6">
-                <figure class="thumbnail">
-                    <a href="https://www.iitp.ac.in/~sriparna/"><img src="img/committee/sriparna.jpg" class="img-responsive img-circle" alt="Image" style="height:190px; width:170px;"></a>
-                    <figcaption class="caption text-center">
-                        <h3>Sriparna Saha
-                            <small>Associate Dean, R&D</small>
-                            <small>IIT Patna, India </small>
-                        </h3>
-                    </figcaption>
-                </figure>
-            </div>
-                        
-            <div class="col-lg-3 col-md-6">
-                <figure class="thumbnail">
-                    <a href="https://sites.google.com/site/jgmorenof/josemoreno"><img src="img/committee/jose.jpeg" class="img-responsive img-circle" alt="Image" style="height:190px; width:170px;"></a>
-                    <figcaption class="caption text-center">
-                        <h3>José G Moreno
-                            <small>Associate Professor</small>
-                            <small>Université de Toulouse</small>
-                            <small>France</small>
-                        </h3>
-                    </figcaption>
-                </figure>
-            </div>
-                        
-                        
-            <div class="col-lg-3 col-md-6">
-                <figure class="thumbnail">
-                    <a href="https://pageperso.univ-lr.fr/antoine.doucet/"><img src="img/committee/antoine.jpg" class="img-responsive img-circle" alt="Image" style="height:190px; width:170px;"></a>
-                    <figcaption class="caption text-center">
-                        <h3>Antoine Doucet
-                            <small>Professor</small>
-                            <small>University of La Rochelle</small>
-                            <small>France</small>
-                        </h3>
-                    </figcaption>
-                </figure>
-            </div>
-	--->
-        <!---
-            <div class="col-lg-3 col-md-6">
-                <figure class="thumbnail">
-                    <a href="https://dias.users.greyc.fr/"><img src="img/committee/gael.jpg" class="img-responsive img-circle" alt="Image" style="height:190px; width:170px;"></a>
-                    <figcaption class="caption text-center">
-                        <h3>Gaël Dias 
-                            <small>Professor</small>
-                            <small>University of Caen Normandie</small>
-                            <small>France</small>
-                        </h3>
-                    </figcaption>
-                </figure>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <figure class="thumbnail">
-                    <a href="https://adammo12.github.io/adamjatowt/"><img src="img/committee/adam.png" class="img-responsive img-circle" alt="Image" style="height:190px; width:170px;"></a>
-                    <figcaption class="caption text-center">
-                        <h3>Adam Jatowt 
-                            <small>Associate Professor</small>
-                            <small>Kyoto University</small>
-                            <small>Japan</small>
-                        </h3>
-                    </figcaption>
-                </figure>
-            </div>
-                        
-        --->
-      <!---                  
+  <!-- HERO -->
+  <header class="hero">
+    <div class="container">
+      <span class="hero-badge"><i class="fa fa-star"></i> PPSN 2022 Workshop</span>
+      <h1>SSF 2022</h1>
+      <h2>Data Science, Machine Learning and Optimization in Support of the Society of the Future</h2>
+
+      <div class="meta">
+        <div><i class="fa fa-link"></i> In conjunction with PPSN XVII</div>
+        <div><i class="fa fa-map-marker"></i> Dortmund, Germany • <i class="fa fa-calendar"></i> September 10–14, 2022 (Workshop: Sep 11)</div>
+      </div>
+
+      <div class="hero-actions">
+        <a class="btn btn-primary btn-primary-grad page-scroll" href="#section-intro">
+          <i class="fa fa-compass"></i> Learn More
+        </a>
+        <a class="btn btn-default btn-ghost page-scroll" href="#section-news" style="margin-left:8px;">
+          <i class="fa fa-bullhorn"></i> Latest News
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- NEWS -->
+  <section id="section-news" class="section-wrapper">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="section-title">
+            <h1>News</h1>
+          </div>
+          <p class="section-sub">Latest updates and workshop highlights — displayed in a Pinterest-style grid.</p>
         </div>
-   
-     
-<div id="task2"></div>
-        <div class="row" style="margin-top: 7%">
-            <div class="col-md-12">
-                <div class="section-title">
-                    <h1>Program Committee</h1>
-                </div>
-                 <ul>
-                     <li><h3> xyz </h3></li>
+      </div>
 
-                </ul>
-                                         
-        </div>
---->
-       </div>                
-                    
-    </section>
-    <section id="section-contact" class="section-wrapper about-event gray-bg" style="margin-top: -4%;">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="section-title">
-                        <h1>Contact Us</h1>
-                    </div>
-                </div>
+      <div class="masonry">
+        <!-- News Card 1 -->
+        <div class="masonry-item">
+          <div class="cardx">
+            <img src="img/Schedule.png" alt="Schedule">
+            <div class="cardx-body">
+              <div class="cardx-title">Accepted Abstracts & Schedule</div>
+              <div class="cardx-meta">Workshop Date: 11 September 2022</div>
+              <span class="chip"><i class="fa fa-clock-o"></i> Updated</span>
+              <span class="chip purple"><i class="fa fa-file-text-o"></i> Program</span>
+              <p style="margin-top:10px; color:var(--muted);">
+                Prospective titles and authors of the accepted abstracts. Click the image to view in full.
+              </p>
             </div>
-
-            <div class="row w-50 mx-auto">
-                <!--  <div class="col-md-7">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3504.8599961833356!2d77.2692578154063!3d28.543927594835793!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce36d07074563%3A0x899f8bbdbff7da90!2sIIITD+New+Academic+Block!5e0!3m2!1sen!2sin!4v1532875838153" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
-            </div> -->
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Email</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="trow">
-                             <td><i class="fa fa-envelope" style="font-size: 20px;"></i>
-                             &nbsp;&nbsp;<a href="mailto:dsmlossf@gmail.com">dsmlossf@gmail.com</a></td>
-                        </tr>
-                    </tbody>
-                </table>
-               
-                    <div class="container">
-                        <div class="row">
-                            <div id="socialicons" style="">
-                                <span style="width: 90px;float: left"><h3>Follow Us</h3></span> &nbsp;
-                                <a class="icon" href="https://twitter.com/dsmlossf" title="Follow with Twitter" target="_blank"><i class="fa fa-twitter" style="font-size: 20px;"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+          </div>
         </div>
 
-        </div>
-        <!--end of .container -->
-
-    </section>
-
-
-    <footer class="footer">
-        <div class="copyright-section ">
-            <div class="container">
-                <div class="col-md-12">
-                    <div class="copytext text-center">&copy; SSF 2022. All rights reserved</a></div>
-                </div>
+        <!-- News Card 2 (example / optional) -->
+        <div class="masonry-item">
+          <div class="cardx">
+            <div class="cardx-body">
+              <div class="cardx-title">Call for Abstracts</div>
+              <div class="cardx-meta">200–300 word extended abstract • Email submission</div>
+              <span class="chip"><i class="fa fa-envelope"></i> dsmlossf@gmail.com</span>
+              <p style="margin-top:10px; color:var(--muted);">
+                We welcome new ideas, position statements, reviews, and techniques addressing societal challenges.
+              </p>
             </div>
-            <!-- .container -->
+          </div>
         </div>
-        <!-- .copyright-section -->
-    </footer>
-    <!-- .footer -->
+
+        <!-- News Card 3 (example / optional) -->
+        <div class="masonry-item">
+          <div class="cardx">
+            <div class="cardx-body">
+              <div class="cardx-title">Important Dates</div>
+              <div class="cardx-meta">Workshop timeline</div>
+              <ul style="margin: 0; padding-left: 18px; color: var(--muted);">
+                <li><b><s>Out Now:</s></b> Call for Abstracts</li>
+                <li><b><s>July 31, 2022:</s></b> Submission Deadline</li>
+                <li><b>August 15, 2022:</b> Author Notification</li>
+                <li><b>September 11, 2022:</b> SSF Workshop Schedule</li>
+                <li><b>September 10–14, 2022:</b> PPSN Conference</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- OVERVIEW -->
+  <section id="section-intro" class="section-wrapper">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="section-title">
+            <h1>Workshop Overview</h1>
+          </div>
+          <p class="section-sub">Motivation, themes, topics of interest, and submission instructions.</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-8">
+          <div class="cardx">
+            <div class="cardx-body">
+              <div class="cardx-title">Workshop</div>
+              <p style="color:var(--muted);">
+                Our societies face major global challenges to sustain and develop our civilisations.
+                The development of dedicated Intelligent Decision-Support Systems (IDSSs) can help address them.
+                This workshop focuses on how Data Science (DS), Machine Learning (ML), Multi-objective Optimisation (MOO),
+                and Multi-criteria Decision-Analysis/Making (MCDA/MCDM) can support policy and decision-making.
+              </p>
+
+              <hr style="border-color: rgba(17,24,39,.08);">
+
+              <div class="cardx-title">Submission Instructions</div>
+              <ul style="color:var(--muted); padding-left:18px;">
+                <li>We invite new ideas, positional statements, reviews/summaries/comments, and techniques on societal challenges.</li>
+                <li>Submissions should be extended abstracts (200–300 words).</li>
+                <li>Please email your submission to: <b>dsmlossf@gmail.com</b></li>
+              </ul>
+
+              <p style="color:var(--muted); margin-top:12px;">
+                Important Note: PPSN 2022 is “on-site” only. In case of pandemic-caused restrictions, the event will switch to full online.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="cardx" style="margin-bottom:16px;">
+            <div class="cardx-body">
+              <div class="cardx-title">Techniques</div>
+              <ul style="color:var(--muted); padding-left:18px;">
+                <li>Trade-offs under competing objectives</li>
+                <li>Uncertainty & time-varying policies</li>
+                <li>Visualising trade-offs</li>
+                <li>Surrogate-assisted exploration</li>
+                <li>Interactive decision support</li>
+                <li>Transfer learning & optimization</li>
+                <li>MCDA/MCDM for IDSS</li>
+                <li>Society models: networks/multilayer</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="cardx">
+            <div class="cardx-body">
+              <div class="cardx-title">Societal Challenges</div>
+              <ul style="color:var(--muted); padding-left:18px;">
+                <li>Climate change impacts</li>
+                <li>Public health</li>
+                <li>Urbanization & population growth</li>
+                <li>Poverty & development</li>
+                <li>Infrastructure & waste management</li>
+                <li>Natural & man-made disasters</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ORGANIZERS -->
+  <section id="section-organizingcommittee" class="section-wrapper">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="section-title">
+            <h1>Organizing Committee</h1>
+          </div>
+          <p class="section-sub">Click a profile to visit the organizer’s page.</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-6 col-md-4">
+          <div class="cardx person">
+            <a href="https://rohitsalgotra.github.io/" target="_blank">
+              <img src="img/committee/rohit.jpg" alt="Rohit Salgotra">
+              <h3>Rohit Salgotra</h3>
+              <div class="small">Research Officer</div>
+              <div class="small">Swansea University • UK</div>
+            </a>
+          </div>
+        </div>
+
+        <div class="col-sm-6 col-md-4">
+          <div class="cardx person">
+            <a href="https://www.swansea.ac.uk/staff/science/compsci/rahat-a-a-m/" target="_blank">
+              <img src="img/committee/alma.jpg" alt="Alma Rahat">
+              <h3>Alma Rahat</h3>
+              <div class="small">Lecturer</div>
+              <div class="small">Swansea University • UK</div>
+            </a>
+          </div>
+        </div>
+
+        <div class="col-sm-6 col-md-4">
+          <div class="cardx person">
+            <a href="http://www.eng.tau.ac.il/~moshaiov/" target="_blank">
+              <img src="img/committee/ami.jpg" alt="Amiram Moshaiov">
+              <h3>Amiram Moshaiov</h3>
+              <div class="small">Professor</div>
+              <div class="small">Tel Aviv University • Israel</div>
+            </a>
+          </div>
+        </div>
+      </div>
 
     </div>
-    <!-- #main-wrapper -->
+  </section>
 
+  <!-- CONTACT -->
+  <section id="section-contact" class="section-wrapper">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="section-title">
+            <h1>Contact</h1>
+          </div>
+          <p class="section-sub">Reach us via email and follow updates.</p>
+        </div>
+      </div>
 
-    <!-- jquery -->
-    <script src="js/jquery-2.1.4.min.js"></script>
+      <div class="row">
+        <div class="col-md-7">
+          <div class="cardx">
+            <div class="cardx-body">
+              <div class="cardx-title"><i class="fa fa-envelope"></i> Email</div>
+              <p style="margin:0; color:var(--muted);">
+                <a href="mailto:dsmlossf@gmail.com"><b>dsmlossf@gmail.com</b></a>
+              </p>
+            </div>
+          </div>
+        </div>
 
-    <!-- Bootstrap -->
-    <script src="js/bootstrap.min.js"></script>
+        <div class="col-md-5">
+          <div class="cardx">
+            <div class="cardx-body">
+              <div class="cardx-title"><i class="fa fa-share-alt"></i> Follow Us</div>
+              <div class="social" style="margin-top:10px;">
+                <a href="https://twitter.com/dsmlossf" target="_blank" title="X/Twitter"><i class="fa fa-twitter"></i></a>
+                <!-- Add more icons if you want -->
+                <!-- <a href="#" target="_blank" title="LinkedIn"><i class="fa fa-linkedin"></i></a> -->
+                <!-- <a href="#" target="_blank" title="Instagram"><i class="fa fa-instagram"></i></a> -->
+              </div>
+              <p style="margin-top:10px; color:var(--muted);">
+                For major announcements, please follow the official account.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
 
-    <!-- Plugin JavaScript -->
-    <script src="js/jquery.easing.min.js"></script>
+    </div>
+  </section>
 
-    <!--<script src="js/one-page-nav.js"></script>-->
-    <script src="js/scripts.js"></script>
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <div style="font-weight:700; font-family:Poppins, sans-serif;">SSF 2022</div>
+          <div style="margin-top:6px; color:rgba(255,255,255,.70);">
+            &copy; SSF 2022. All rights reserved.
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- jQuery (local) -->
+  <script src="js/jquery-2.1.4.min.js"></script>
+
+  <!-- Bootstrap JS (local) -->
+  <script src="js/bootstrap.min.js"></script>
+
+  <!-- Plugin JS (local) -->
+  <script src="js/jquery.easing.min.js"></script>
+  <script src="js/scripts.js"></script>
+
+  <script>
+    // Optional: make navbar solid after scroll for extra polish
+    $(window).on('scroll', function(){
+      if($(window).scrollTop() > 30){
+        $('.navbar.main-menu').css('background','rgba(255,255,255,.96)');
+      } else {
+        $('.navbar.main-menu').css('background','rgba(255,255,255,.85)');
+      }
+    });
+
+    // Make schedule image click open full view (simple modal-like behavior)
+    $(document).on('click', '#section-news img', function(){
+      var src = $(this).attr('src');
+      var modal = $(
+        '<div id="imgModal" style="position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.75);display:flex;align-items:center;justify-content:center;padding:24px;">' +
+          '<div style="max-width:1100px;width:100%;position:relative;">' +
+            '<a href="#" id="imgModalClose" style="position:absolute;right:0;top:-40px;color:#fff;font-size:26px;text-decoration:none;">&times;</a>' +
+            '<img src="'+src+'" style="width:100%;height:auto;border-radius:16px;box-shadow:0 20px 50px rgba(0,0,0,.35);"/>' +
+          '</div>' +
+        '</div>'
+      );
+      $('body').append(modal);
+    });
+    $(document).on('click', '#imgModal, #imgModalClose', function(e){
+      e.preventDefault();
+      $('#imgModal').remove();
+    });
+  </script>
+
 </body>
-
 </html>
